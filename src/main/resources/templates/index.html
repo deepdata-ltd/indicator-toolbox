@@ -1,0 +1,57 @@
+{{#_base}}
+
+<header class="page-header">
+	{{>_includes/navbar}}
+
+	<br>
+	<div class="row">
+		<h1>{{#m}}base.title{{/m}}</h1>
+	</div>
+	<div class="row">
+		<h2 class="flow-text light lead">{{#m}}index.lead{{/m}}</h2>
+	</div>
+	<div class="row">
+		<a href="{{ paths.INDICATOR_LIST_URI }}" class="btn-large waves-effect waves-light">
+			<i class="material-icons left">search</i>
+			browse indicators
+		</a>
+	</div>
+	<br>
+	<br>
+</header>
+
+<main class="page-content">
+	<div class="container">
+		<div class="row">
+			<section class="col s12 l6 section" id="about">
+				<h3>About</h3>
+				{{#markdown}}{{#m}}lorem{{/m}}{{/markdown}}
+				<p class="center license">
+					<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img
+							alt="Creative Commons License" style="border-width:0;margin-bottom:10px"
+							src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"></a>
+					<br>
+					This work is licensed under a <a rel="license"
+													 href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><b>Creative
+					Commons Attribution-NonCommercial-ShareAlike 4.0 International License</b></a>.
+				</p>
+			</section>
+			<section class="col s12 l5 offset-l1 section" id="export">
+				<div class="card-panel">
+					<h3>Download</h3>
+					<p>The whole catalog is available for downloading in the following formats:</p>
+					{{#export.formats}}
+					<a href="/export/{{ format }}" class="btn waves-effect waves-light">
+						{{ name }} ({{ size }} KB)
+					</a>
+					{{/export.formats}}
+				</div>
+			</section>
+		</div>
+	</div>
+</main>
+
+{{>_includes/footer}}
+
+{{/_base}}
+{{>_layouts/base}}

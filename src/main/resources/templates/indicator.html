@@ -1,0 +1,85 @@
+{{#_base}}
+
+<header class="page-header">
+	{{>_includes/navbar}}
+</header>
+
+<main class="page-content">
+	<div class="container">
+		<div class="row">
+			<div class="col s12">
+				<h1>
+					<small><a href="{{ paths.INDICATOR_LIST_URI }}">{{#m}}indicators.title{{/m}}</a> /</small>
+					<br>
+					{{ indicator.name }}
+
+					{{#nick}}
+					<!-- @formatter:off -->
+					<div class="right">
+						<a href="{{ paths.INDICATOR_EDIT_URI }}{{ indicator.id }}" class="btn-floating btn blue waves-effect waves-light tooltipped" data-delay="50" data-position="bottom" data-tooltip="{{#m}}admin.indicator.edit{{/m}}">
+							<i class="material-icons">mode_edit</i>
+						</a>
+						<a href="{{ paths.INDICATOR_ADD_URI }}?base={{ indicator.id }}" class="btn-floating btn green waves-effect waves-light tooltipped" data-delay="50" data-position="bottom"
+							 data-tooltip="{{#m}}admin.indicator.clone{{/m}}">
+								<i class="material-icons">content_copy</i>
+							</a>
+						<a href="{{ paths.INDICATOR_DELETE_URI }}{{ indicator.id }}" class="btn-floating btn red waves-effect waves-light tooltipped" data-delay="50" data-position="bottom" data-tooltip="{{#m}}admin.indicator.delete{{/m}}">
+							<i class="material-icons">delete</i>
+						</a>
+					</div>
+					<!-- @formatter:on -->
+					{{/nick}}
+				</h1>
+			</div>
+		</div>
+
+		<div class="divider"></div>
+
+		<div class="row section">
+			<div class="col s12 l10 offset-l1">
+				<table class="bordered highlight">
+					<tbody>
+					{{#details-field}}id{{/details-field}}{{>_includes/details-field}}
+					{{#details-field}}state!enum{{/details-field}}{{>_includes/details-field}}
+					{{#details-field}}autonomy!enum{{/details-field}}{{>_includes/details-field}}
+					{{#details-field}}description{{/details-field}}{{>_includes/details-field}}
+					{{#details-field}}country{{/details-field}}{{>_includes/details-field}}
+					{{#details-field}}language{{/details-field}}{{>_includes/details-field}}
+					{{#details-field}}projectUrl{{/details-field}}{{>_includes/details-field}}
+					{{#details-field}}developer{{/details-field}}{{>_includes/details-field}}
+					{{#details-field}}programmingLanguage{{/details-field}}{{>_includes/details-field}}
+					{{#details-field}}developmentDate{{/details-field}}{{>_includes/details-field}}
+					{{#details-field}}sourceCodeUrl{{/details-field}}{{>_includes/details-field}}
+					{{#details-field}}dataSource{{/details-field}}{{>_includes/details-field}}
+					{{#details-field}}processPhase{{/details-field}}{{>_includes/details-field}}
+					{{#details-field}}validation!enum{{/details-field}}{{>_includes/details-field}}
+					{{#isValidated}}
+					{{#details-field}}validationMethod{{/details-field}}{{>_includes/details-field}}
+					{{/isValidated}}
+
+					<tr class="details-field">
+						<th class="hide-on-small-only">
+							<i class="material-icons left">{{#m}}indicator.tags.icon{{/m}}</i>
+							{{#m}}indicator.tags{{/m}}
+						</th>
+						<td width="60%">
+							<strong class="hide-on-med-and-up">{{#m}}indicator.tags{{/m}}<br></strong>
+							{{#indicator.tags}}
+							<a href="{{ paths.INDICATOR_LIST_URI }}?tags={{ name }}">
+								<div class="chip">{{ name }}</div>
+							</a>
+							{{/indicator.tags}}
+						</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		{{>_includes/disqus}}
+	</div>
+</main>
+
+{{>_includes/footer}}
+
+{{/_base}}
+{{>_layouts/base}}

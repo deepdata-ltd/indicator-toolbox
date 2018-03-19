@@ -1,0 +1,87 @@
+<!--
+	Copyright 2018 DeepData Ltd.
+
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+
+	http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>
+		{{#subtitle}}{{.}} -{{/subtitle}}
+		{{#title}}{{.}} -{{/title}}
+		{{#m}}base.title{{/m}}
+	</title>
+
+	<!--<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,700" rel="stylesheet">-->
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,400i,700&amp;subset=latin-ext"
+		  rel="stylesheet">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link type="text/css" rel="stylesheet" href="/css/style.css" media="screen,projection"/>
+
+	<!-- @formatter:off -->
+	<script type="text/javascript"
+			src="/webjars/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript"
+			src="/webjars/materializecss/0.100.1/js/materialize.min.js"></script>
+	{{#nonEnglishLocale}}
+		<script type="text/javascript"
+				src="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/compressed/translations/{{locale}}.js"></script>
+	{{/nonEnglishLocale}}
+	<script type="text/javascript" src="/js/global.js"></script>
+	<!-- @formatter:on -->
+</head>
+<body>
+{{{ _base.content }}}
+
+{{#nick}}
+<div class="fixed-action-btn">
+	<a class="btn-floating btn-large">
+		<i class="large material-icons">menu</i>
+	</a>
+	<ul>
+		<!-- @formatter:off -->
+		<li>
+			<a href="{{ paths.TAG_LIST_URI }}" class="btn-floating purple waves-effect waves-light tooltipped"
+			   data-delay="50" data-position="left" data-tooltip="{{#m}}admin.tags.manage{{/m}}">
+				<i class="material-icons">folder_open</i>
+			</a>
+		</li>
+		<li>
+			<a href="{{ paths.INDICATOR_ADD_URI }}" class="btn-floating green waves-effect waves-light tooltipped"
+			   data-delay="50" data-position="left" data-tooltip="{{#m}}admin.indicators.new{{/m}}">
+				<i class="material-icons">add</i>
+			</a>
+		</li>
+		{{#indicator}}
+		<li>
+			<a href="{{ paths.INDICATOR_ADD_URI }}?base={{indicator.id}}" class="btn-floating green waves-effect waves-light tooltipped"
+			   data-delay="50" data-position="left" data-tooltip="{{#m}}admin.indicator.clone{{/m}}">
+				<i class="material-icons">content_copy</i>
+			</a>
+		</li>
+		<li>
+			<a href="{{ paths.INDICATOR_EDIT_URI }}{{indicator.id}}" class="btn-floating blue waves-effect waves-light tooltipped" data-delay="50" data-position="left" data-tooltip="{{#m}}admin.indicator.edit{{/m}}">
+				<i class="material-icons">mode_edit</i>
+			</a>
+		</li>
+		{{/indicator}}
+		<!-- @formatter:on -->
+	</ul>
+</div>
+{{/nick}}
+</body>
+</html>

@@ -1,0 +1,15 @@
+{{#_error}}
+<h1>Oops!</h1>
+<p class="flow-text lead">
+	Sorry, something went wrong on our side.
+	Please try again later, or if the problem seems persistent, please contact us.
+	Information on the error:
+</p>
+<p class="flow-text lead">
+	<code>
+		<strong title="{{ error }}">{{ status }}</strong>
+		{{ message }}
+	</code>
+</p>
+{{/_error}}
+{{>_layouts/error}}

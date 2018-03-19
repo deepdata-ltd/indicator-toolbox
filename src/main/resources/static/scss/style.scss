@@ -1,0 +1,239 @@
+/*
+	Copyright 2018 DeepData Ltd.
+
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+
+	http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+*/
+
+@charset "UTF-8";
+@import "components/mixins";
+@import "components/color";
+
+$primary-color: color("indigo", "darken-1");
+$secondary-color: color("pink", "accent-3");
+$success-color: color("green", "base");
+$error-color: color("red", "base");
+$link-color: color("light-blue", "darken-1");
+$chip-selected-color: $secondary-color;
+
+$label-font-size: 1rem;
+
+@import "components/variables";
+@import "components/normalize";
+@import "components/global";
+@import "components/badges";
+@import "components/icons-material-design";
+@import "components/grid";
+@import "components/navbar";
+//@import "components/roboto";
+@import "components/typography";
+@import "components/transitions";
+@import "components/cards";
+@import "components/toast";
+@import "components/tabs";
+@import "components/tooltip";
+@import "components/buttons";
+@import "components/dropdown";
+@import "components/waves";
+@import "components/modal";
+@import "components/collapsible";
+@import "components/chips";
+@import "components/materialbox";
+@import "components/forms/forms";
+@import "components/table_of_contents";
+@import "components/sideNav";
+@import "components/preloader";
+@import "components/slider";
+@import "components/carousel";
+@import "components/tapTarget";
+@import "components/pulse";
+@import "components/date_picker/default";
+@import "components/date_picker/default.date";
+@import "components/date_picker/default.time";
+
+body {
+	color: color("blue-grey", "darken-3");
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+.bg-primary { background-color: $primary-color; }
+.bg-secondary { background-color: $secondary-color; }
+.bg-success { background-color: $success-color; }
+.bg-error { background-color: $error-color; }
+
+.text-primary { color: $primary-color; }
+.text-secondary { color: $secondary-color; }
+.text-success { color: $success-color; }
+.text-error { color: $error-color; }
+
+.chip:hover {
+	@extend .bg-secondary, .white-text;
+}
+
+.cursor-pointer {
+	cursor: pointer;
+}
+
+.details-field {
+	th {
+		padding-right: 40px;
+		vertical-align: top;
+		white-space: nowrap;
+	}
+
+	.material-icons {
+    	margin-top: -2px;
+    }
+}
+
+.error-messages {
+	border-left: 10px solid white;
+	padding-left: 3rem !important;
+}
+
+.flag-pattern {
+	background-image: url('/img/material-flag-pattern.png');
+}
+
+footer {
+	a {
+		color: white;
+	}
+}
+
+.full-page {
+	@extend .flag-pattern, .valign-wrapper;
+
+	background-color: $primary-color;
+	color: white;
+	height: 100vh;
+	width: 100%;
+}
+
+.fw-400 {
+	font-weight: 400;
+}
+
+header {
+	h1, h2 {
+		font-weight: bold;
+		text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.75);
+	}
+}
+
+html {
+	font-family: 'Roboto Condensed', sans-serif;
+}
+
+.input-field .prefix,
+.switch-group .prefix {
+	padding-top: 8px;
+}
+
+.lead {
+	text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.75);
+}
+
+.login-panel {
+	color: color("blue-grey", "darken-3");
+
+	.error {
+		color: $error-color !important;
+		text-align: center;
+	}
+}
+
+.logos {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+
+	img {
+		margin: 5px;
+		height: 45px;
+		width: auto;
+	}
+}
+
+main {
+	flex: 1 0 auto;
+
+	ul:not(.browser-default):not(.collapsible):not(.dropdown-content) {
+		list-style-type: initial;
+		padding-left: 40px;
+
+		& > li {
+			list-style-type: initial;
+		}
+	}
+}
+
+nav .brand-logo {
+	@media #{$small-and-down} {
+		font-size: 1.3rem;
+	}
+}
+
+p {
+	text-align: justify;
+}
+
+.page-header {
+	@extend .flag-pattern, .z-depth-1;
+
+	background-color: $primary-color;
+	color: white;
+
+	.row {
+		text-align: center;
+	}
+}
+
+.page-content {
+	margin: 75px 0px;
+}
+
+strong {
+	font-weight: 700;
+}
+
+.switch-group {
+	margin-bottom: 2rem;
+
+	.prefix {
+    	// copy of .input-field .prefix
+    	font-size: 2rem;
+    	position: absolute;
+        transition: color .2s;
+        width: 3rem;
+    }
+
+	.switch {
+		@extend .valign-wrapper;
+
+		margin-top: 1rem;
+
+		label {
+			margin-top: 0.5rem;
+		}
+	}
+}
+
+#tags-editor label {
+	@extend label.active;
+}
+
+.valign-wrapper {
+	justify-content: space-between;
+}

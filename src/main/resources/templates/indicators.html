@@ -1,0 +1,256 @@
+{{#_base}}
+
+<header class="page-header">
+	{{>_includes/navbar}}
+</header>
+
+<main class="page-content">
+	<div class="container">
+		<div class="row">
+			<div class="col s12">
+				<h1>
+					{{#m}}indicators.title{{/m}}
+					{{#form.open}}
+					({{ result.count }}/{{ result.allCount }})
+					{{/form.open}}
+					{{^form.open}}
+					({{ result.allCount }})
+					{{/form.open}}
+
+					{{#nick}}
+					<!-- @formatter:off -->
+					<a href="{{ paths.INDICATOR_ADD_URI }}" class="btn-floating btn green waves-effect waves-light right tooltipped" data-delay="50" data-position="bottom"
+					   data-tooltip="{{#m}}admin.indicators.new{{/m}}">
+						<i class="material-icons">add</i>
+					</a>
+					<!-- @formatter:on -->
+					{{/nick}}
+				</h1>
+			</div>
+		</div>
+
+		<div class="divider"></div>
+
+		<div class="section">
+			<br>
+			<ul class="collapsible" id="filters" data-collapsible="accordion">
+				<li>
+					<div class="collapsible-header {{#form.open}}active{{/form.open}}">
+						<i class="material-icons">filter_list</i>{{#m}}indicators.filter{{/m}}
+					</div>
+					<div class="collapsible-body">
+						<form method="get">
+							<div class="row">
+								<div class="input-field col s12 l6">
+									<i class="material-icons prefix">search</i>
+									<input id="search" name="search" type="text" value="{{ form.search }}"
+										   autocomplete="off">
+									<label for="search">{{#m}}indicators.filter.search{{/m}}</label>
+								</div>
+								<div class="input-field col s12 l6">
+									<i class="material-icons prefix">{{#m}}indicator.autonomy.icon{{/m}}</i>
+									<select name="autonomy">
+										<option value="" selected>{{#m}}indicators.filter.autonomy.any{{/m}}
+										</option>
+										<!-- @formatter:off -->
+										{{#autonomyOptions}}
+										<option value="{{value}}"
+												{{#selected}}selected{{/selected}}>{{text}}</option>
+										{{/autonomyOptions}}
+										<!-- @formatter:on -->
+									</select>
+									<label>{{#m}}indicators.filter.autonomy{{/m}}</label>
+								</div>
+								<div class="input-field col s12 l6">
+									<i class="material-icons prefix">{{#m}}indicator.country.icon{{/m}}</i>
+									<select name="country">
+										<option value="" selected>{{#m}}indicators.filter.country.any{{/m}}
+										</option>
+										<!-- @formatter:off -->
+										{{#countryOptions}}
+										<option value="{{value}}"
+												{{#selected}}selected{{/selected}}>{{text}}</option>
+										{{/countryOptions}}
+										<!-- @formatter:on -->
+									</select>
+									<label>{{#m}}indicators.filter.country{{/m}}</label>
+								</div>
+								<div class="input-field col s12 l6">
+									<i class="material-icons prefix">{{#m}}indicator.language.icon{{/m}}</i>
+									<select name="language">
+										<option value="" selected>{{#m}}indicators.filter.language.any{{/m}}
+										</option>
+										<!-- @formatter:off -->
+										{{#languageOptions}}
+										<option value="{{value}}"
+												{{#selected}}selected{{/selected}}>{{text}}</option>
+										{{/languageOptions}}
+										<!-- @formatter:on -->
+									</select>
+									<label>{{#m}}indicators.filter.language{{/m}}</label>
+								</div>
+								<div class="input-field col s12 l6">
+									<i class="material-icons prefix">{{#m}}indicator.processPhase.icon{{/m}}</i>
+									<select name="processPhase">
+										<option value="" selected>{{#m}}indicators.filter.processPhase.any{{/m}}
+										</option>
+										<!-- @formatter:off -->
+										{{#processPhaseOptions}}
+										<option value="{{value}}"
+												{{#selected}}selected{{/selected}}>{{text}}</option>
+										{{/processPhaseOptions}}
+										<!-- @formatter:on -->
+									</select>
+									<label>{{#m}}indicators.filter.processPhase{{/m}}</label>
+								</div>
+								<div class="input-field col s12 l6">
+									<i class="material-icons prefix">{{#m}}indicator.state.icon{{/m}}</i>
+									<select name="state">
+										<option value="" selected>{{#m}}indicators.filter.state.any{{/m}}
+										</option>
+										<!-- @formatter:off -->
+										{{#stateOptions}}
+										<option value="{{value}}"
+												{{#selected}}selected{{/selected}}>{{text}}</option>
+										{{/stateOptions}}
+										<!-- @formatter:on -->
+									</select>
+									<label>{{#m}}indicators.filter.state{{/m}}</label>
+								</div>
+								<div class="input-field col s12 l6">
+									<i class="material-icons prefix">{{#m}}indicator.validation.icon{{/m}}</i>
+									<select name="validation">
+										<option value="" selected>{{#m}}indicators.filter.validation.any{{/m}}
+										</option>
+										<!-- @formatter:off -->
+										{{#validationOptions}}
+										<option value="{{value}}"
+												{{#selected}}selected{{/selected}}>{{text}}</option>
+										{{/validationOptions}}
+										<!-- @formatter:on -->
+									</select>
+									<label>{{#m}}indicators.filter.validation{{/m}}</label>
+								</div>
+							</div>
+							<div class="row" id="tags-editor">
+								<div class="input-field col s12">
+									<i class="material-icons prefix">{{#m}}indicator.tags.icon{{/m}}</i>
+									<label>{{#m}}indicators.filter.tags{{/m}}</label>
+									<div id="tags-input"></div>
+								</div>
+							</div>
+							<div class="row center">
+								<br>
+								<button type="submit" class="btn waves-effect waves-light">
+									{{#m}}indicators.filter.submit{{/m}}
+								</button>
+								<a href="{{ paths.INDICATOR_LIST_URI }}" class="btn blue waves-effect waves-light">
+									{{#m}}indicators.filter.reset{{/m}}
+								</a>
+							</div>
+
+							<!-- autocomplete -->
+							{{#allTags}}
+							<input type="hidden" value="{{.}}" class="autocomplete-import tags">
+							{{/allTags}}
+
+							<!-- initial form data -->
+							{{#form.tags}}
+							<input type="hidden" name="tags" value="{{.}}" class="import">
+							{{/form.tags}}
+
+							<!-- dynamic form data -->
+							<div data-bind="foreach: tags">
+								<input type="hidden" name="tags" data-bind="textInput: tag">
+							</div>
+						</form>
+					</div>
+				</li>
+			</ul>
+		</div>
+
+		<div class="row section">
+			{{#result.indicators}}
+			<div class="col s12 l10 offset-l1">
+				<div class="card-panel">
+					<h3>
+						<a href="{{ paths.INDICATOR_URI }}{{ id }}">{{ name }}</a>
+						<small class="grey-text">({{ id }})</small>
+						{{#nick}}
+						<!-- @formatter:off -->
+						<div class="right">
+							<a href="{{ paths.INDICATOR_EDIT_URI }}{{ id }}" class="btn-floating btn blue waves-effect waves-light tooltipped" data-delay="50" data-position="bottom"
+							 data-tooltip="{{#m}}admin.indicator.edit{{/m}}">
+								<i class="material-icons">mode_edit</i>
+							</a>
+							<a href="{{ paths.INDICATOR_ADD_URI }}?base={{ id }}" class="btn-floating btn green waves-effect waves-light tooltipped" data-delay="50" data-position="bottom"
+							 data-tooltip="{{#m}}admin.indicator.clone{{/m}}">
+								<i class="material-icons">content_copy</i>
+							</a>
+							<a href="{{ paths.INDICATOR_DELETE_URI }}{{ id }}" class="btn-floating btn red waves-effect waves-light tooltipped" data-delay="50" data-position="bottom"
+							 data-tooltip="{{#m}}admin.indicator.delete{{/m}}">
+								<i class="material-icons">delete</i>
+							</a>
+						</div>
+						<!-- @formatter:on -->
+						{{/nick}}
+					</h3>
+					<div class="row">
+						<div class="col s12 l6">
+							{{#active}}
+							<strong class="text-secondary">Active</strong>
+							<br>
+							{{/active}}
+
+							{{#country}}
+							<strong>{{#m}}indicator.country{{/m}}:</strong> {{.}}
+							<br>
+							{{/country}}
+
+							{{#language}}
+							<strong>{{#m}}indicator.language{{/m}}:</strong> {{.}}
+							<br>
+							{{/language}}
+
+							{{#developmentDate}}
+							<strong>{{#m}}indicator.developmentDate{{/m}}:</strong> {{.}}
+							{{/developmentDate}}
+						</div>
+						<div class="col s12 l6">
+							<p class="hide-on-small-only"><em>{{{ description }}}</em></p>
+						</div>
+					</div>
+					<div>
+						{{#tags}}
+						<a href="{{ paths.INDICATOR_LIST_URI }}?tags={{ name }}">
+							<div class="chip">{{ name }}</div>
+						</a>
+						{{/tags}}
+					</div>
+				</div>
+			</div>
+			{{/result.indicators}}
+		</div>
+		<div class="row section center">
+			{{#result.prevPage}}
+			<a href="?{{ result.queryString }}&page={{ result.prevPage }}" class="btn waves-effect waves-light">
+				<i class="material-icons left">keyboard_arrow_left</i>
+				{{#m}}indicators.pagination.previous{{/m}}
+			</a>
+			{{/result.prevPage}}
+			{{#result.nextPage}}
+			<a href="?{{ result.queryString }}&page={{ result.nextPage }}" class="btn waves-effect waves-light">
+				{{#m}}indicators.pagination.next{{/m}}
+				<i class="material-icons right">keyboard_arrow_right</i>
+			</a>
+			{{/result.nextPage}}
+		</div>
+	</div>
+</main>
+
+{{>_includes/footer}}
+{{>_includes/knockout}}
+<script type="text/javascript" src="/js/indicator-filter.js"></script>
+
+{{/_base}}
+{{>_layouts/base}}

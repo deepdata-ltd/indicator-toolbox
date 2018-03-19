@@ -1,0 +1,10 @@
+<li><a href="/">{{#m}}index.title{{/m}}</a></li>
+<li><a href="{{ paths.INDICATOR_LIST_URI }}">{{#m}}indicators.title{{/m}}</a></li>
+<li><a href="{{ paths.RESOURCES_URI }}">{{#m}}resources.title{{/m}}</a></li>
+{{^nick}}
+{{/nick}}
+{{#nick}}
+<li><a href="{{ paths.TAG_LIST_URI }}">{{#m}}admin.tags.title{{/m}}</a></li>
+<li><a href="{{ paths.ADMIN_MANUAL_URI }}">{{#m}}admin.manual.title{{/m}}</a></li>
+<li><a href="{{ paths.LOGOUT_URI }}">{{#m}}logout{{/m}} ({{ nick }})</a></li>
+{{/nick}}

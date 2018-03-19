@@ -1,0 +1,20 @@
+<nav class="z-depth-0" style="background: transparent">
+	<div class="nav-wrapper">
+		<div class="container">
+			<a href="/" class="brand-logo hide-on-small-only">
+				{{#m}}base.title{{/m}}
+			</a>
+			<a href="#" data-activates="mobile-menu" class="button-collapse">
+				<i class="material-icons">menu</i>
+			</a>
+			<ul class="right hide-on-med-and-down">
+				{{>_includes/navbar-links}}
+			</ul>
+			<ul class="side-nav" id="mobile-menu">
+				<h5 class="center grey-text"><br>Indicator Toolbox</h5>
+				{{>_includes/navbar-links}}
+			</ul>
+		</div>
+
+	</div>
+</nav>

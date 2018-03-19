@@ -1,0 +1,17 @@
+{{#disqus.id}}
+<div class="row section">
+	<div class="col s12 l10 offset-l1">
+		<div id="disqus_thread"></div>
+		<!-- @formatter:off -->
+		<script>
+			(function() {
+			var d = document, s = d.createElement('script');
+			s.src = 'https://{{ disqus.id }}.disqus.com/embed.js';
+			s.setAttribute('data-timestamp', +new Date());
+			(d.head || d.body).appendChild(s);
+			})();
+		</script>
+		<!-- @formatter:on -->
+	</div>
+</div>
+{{/disqus.id}}

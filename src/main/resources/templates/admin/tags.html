@@ -1,0 +1,54 @@
+{{#_admin}}
+
+
+<div class="row">
+	<div class="col s12">
+		<h1>
+			{{#m}}admin.tags.title{{/m}}
+
+			<!-- @formatter:off -->
+			<a href="{{ paths.TAG_CLEANUP_URI }}" class="btn-floating btn purple waves-effect waves-light right tooltipped" data-delay="50" data-position="bottom"
+			   data-tooltip="{{#m}}admin.tags.cleanup{{/m}}">
+				<i class="material-icons">delete_sweep</i>
+			</a>
+			<!-- @formatter:on -->
+		</h1>
+	</div>
+</div>
+
+<div class="divider"></div>
+
+<div class="row section">
+	{{#tags}}
+	<div class="col s12 l10 offset-l1">
+		<div class="card-panel valign-wrapper">
+			<div class="flow-text">
+				<a href="{{ paths.INDICATOR_LIST_URI }}?tags={{ name }}">{{ name }}</a>
+				<span class="grey-text">({{ indicators.size }})</span>
+			</div>
+			{{#nick}}
+			<div class="right">
+				<!-- @formatter:off -->
+				<a href="javascript:void(0)" data-id="{{ id }}" data-name="{{ name }}"
+					 class="btn-floating btn blue waves-effect waves-light tooltipped tag-rename-btn"
+					data-delay="50" data-position="bottom"
+					data-tooltip="{{#m}}admin.tag.edit{{/m}}">
+						<i class="material-icons">mode_edit</i>
+				</a>
+				<a href="{{ paths.TAG_DELETE_URI }}{{ id }}"
+					class="btn-floating btn red waves-effect waves-light tooltipped"
+					data-delay="50" data-position="bottom"
+					data-tooltip="{{#m}}admin.tag.delete{{/m}}">
+						<i class="material-icons">delete</i>
+				</a>
+				<!-- @formatter:on -->
+			</div>
+			{{/nick}}
+		</div>
+	</div>
+	{{/tags}}
+</div>
+{{>_includes/tag-rename-modal}}
+
+{{/_admin}}
+{{>_layouts/admin}}

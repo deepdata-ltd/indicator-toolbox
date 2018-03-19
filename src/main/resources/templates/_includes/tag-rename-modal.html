@@ -1,0 +1,34 @@
+{{#nick}}
+<div id="tag-rename-modal" class="modal">
+	<form action="" method="post">
+		<input name="_csrf" type="hidden" value="{{ _csrf.token }}"/>
+		<input name="id" type="hidden" data-bind="textInput: id"/>
+		<div class="modal-content">
+			<h4>{{#m}}admin.tag.edit{{/m}}</h4>
+			<div class="divider"></div>
+			<div class="row section">
+				<br>
+				<div class="input-field col s12">
+					<input type="text" id="old-name" data-bind="textInput: name" autocomplete="off" readonly>
+					<label for="old-name">{{#m}}admin.tag.oldName{{/m}}</label>
+				</div>
+				<div class="input-field col s12">
+					<input type="text" id="new-name" name="name" data-bind="textInput: newName" autocomplete="off">
+					<label for="new-name">{{#m}}admin.tag.newName{{/m}}</label>
+				</div>
+				<p class="col s12">{{#m}}admin.tag.edit.note{{/m}}</p>
+			</div>
+		</div>
+		<div class="divider"></div>
+		<div class="modal-footer">
+			<button type="submit" class="modal-action modal-close btn waves-effect waves-light">
+				{{#m}}admin.tag.save{{/m}}
+			</button>
+			<a href="javascript:void(0)" class="modal-action modal-close btn blue waves-effect waves-light">
+				{{#m}}admin.tag.cancel{{/m}}
+			</a>
+		</div>
+	</form>
+</div>
+<script type="text/javascript" src="/js/tag-rename.js"></script>
+{{/nick}}

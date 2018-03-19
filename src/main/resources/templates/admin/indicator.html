@@ -1,0 +1,187 @@
+{{#_admin}}
+
+<div class="row">
+	<div class="col s12">
+		<h1>
+			<small><a href="{{ paths.INDICATOR_LIST_URI }}">{{#m}}indicators.title{{/m}}</a> /</small>
+			<br>
+			{{^indicator.id}}
+			{{#m}}admin.indicators.new.title{{/m}}
+			{{/indicator.id}}
+			{{#indicator.id}}
+			<a href="{{ paths.INDICATOR_URI }}{{ indicator.id }}">{{ indicator.name }}</a>
+			<a href="{{ paths.INDICATOR_DELETE_URI }}{{ indicator.id }}"
+			   class="btn-floating btn red waves-effect waves-light right tooltipped" data-delay="50"
+			   data-position="bottom" data-tooltip="{{#m}}admin.indicator.delete{{/m}}">
+				<i class="material-icons">delete</i>
+			</a>
+			{{/indicator.id}}
+		</h1>
+	</div>
+</div>
+
+<div class="divider"></div>
+
+<form action="{{ action }}" method="post" id="indicator-form">
+	<input name="_csrf" type="hidden" value="{{ _csrf.token }}"/>
+	<div class="row section">
+		<div class="col s12 l6">
+			<input name="id" type="hidden" value="{{indicator.id}}">
+
+			{{#input-field}}name{{/input-field}}{{>_includes/input-field}}
+
+			<div class="input-field col s12">
+				<i class="material-icons prefix">{{#m}}indicator.country.icon{{/m}}</i>
+				<select name="country">
+					<option value="" selected>{{#m}}base.select.default{{/m}}</option>
+					<!-- @formatter:off -->
+					{{#countryOptions}}
+					<option value="{{value}}" {{#selected}}selected{{/selected}}>{{text}}</option>
+					{{/countryOptions}}
+					<!-- @formatter:on -->
+				</select>
+				<label>{{#m}}indicator.country{{/m}}</label>
+			</div>
+
+			<div class="input-field col s12">
+				<i class="material-icons prefix">{{#m}}indicator.language.icon{{/m}}</i>
+				<select name="language">
+					<option value="" selected>{{#m}}base.select.default{{/m}}</option>
+					<!-- @formatter:off -->
+					{{#languageOptions}}
+					<option value="{{value}}" {{#selected}}selected{{/selected}}>{{text}}</option>
+					{{/languageOptions}}
+					<!-- @formatter:on -->
+				</select>
+				<label>{{#m}}indicator.language{{/m}}</label>
+			</div>
+
+			{{#input-field}}projectUrl{{/input-field}}{{>_includes/input-field}}
+			{{#input-field}}developer{{/input-field}}{{>_includes/input-field}}
+			{{#input-field}}programmingLanguage{{/input-field}}{{>_includes/input-field}}
+
+			<div class="input-field col s12">
+				<i class="material-icons prefix">{{#m}}indicator.developmentDate.icon{{/m}}</i>
+				<input id="developmentDate" name="developmentDateStr" type="text"
+					   value="{{ indicator.developmentDateStr}}" class="datepicker">
+				<label for="developmentDate">{{#m}}indicator.developmentDate{{/m}}</label>
+			</div>
+
+			{{#input-field}}sourceCodeUrl{{/input-field}}{{>_includes/input-field}}
+		</div>
+		<div class="col s12 l6">
+			<div class="input-field col s12">
+				<i class="material-icons prefix">{{#m}}indicator.state.icon{{/m}}</i>
+				<select name="state">
+					<option value="" selected>{{#m}}base.select.default{{/m}}</option>
+					<!-- @formatter:off -->
+					{{#stateOptions}}
+					<option value="{{value}}" {{#selected}}selected{{/selected}}>{{text}}</option>
+					{{/stateOptions}}
+					<!-- @formatter:on -->
+				</select>
+				<label>{{#m}}indicator.state{{/m}}</label>
+			</div>
+			<div class="input-field col s12">
+				<i class="material-icons prefix">{{#m}}indicator.autonomy.icon{{/m}}</i>
+				<select name="autonomy">
+					<option value="" selected>{{#m}}base.select.default{{/m}}</option>
+					<!-- @formatter:off -->
+					{{#autonomyOptions}}
+					<option value="{{value}}" {{#selected}}selected{{/selected}}>{{text}}</option>
+					{{/autonomyOptions}}
+					<!-- @formatter:on -->
+				</select>
+				<label>{{#m}}indicator.autonomy{{/m}}</label>
+			</div>
+			<div class="input-field col s12">
+				<i class="material-icons prefix">{{#m}}indicator.description.icon{{/m}}</i>
+				<textarea id="description" name="description"
+						  class="materialize-textarea">{{ indicator.description}}</textarea>
+				<label for="description">{{#m}}indicator.description{{/m}}</label>
+			</div>
+			<div class="input-field col s12">
+				<i class="material-icons prefix">{{#m}}indicator.dataSource.icon{{/m}}</i>
+				<textarea id="dataSource" name="dataSource"
+						  class="materialize-textarea">{{ indicator.dataSource}}</textarea>
+				<label for="dataSource">{{#m}}indicator.dataSource{{/m}}</label>
+			</div>
+			<div class="input-field col s12">
+				<i class="material-icons prefix">{{#m}}indicator.processPhase.icon{{/m}}</i>
+				<select name="processPhase">
+					<option value="" selected>{{#m}}base.select.default{{/m}}</option>
+					<!-- @formatter:off -->
+					{{#processPhaseOptions}}
+					<option value="{{value}}" {{#selected}}selected{{/selected}}>{{text}}</option>
+					{{/processPhaseOptions}}
+					<!-- @formatter:on -->
+				</select>
+				<label>{{#m}}indicator.processPhase{{/m}}</label>
+			</div>
+			<div class="input-field col s12">
+				<i class="material-icons prefix">{{#m}}indicator.validation.icon{{/m}}</i>
+				<select name="validation" data-bind="value: validation">
+					<option value="" selected>{{#m}}base.select.default{{/m}}</option>
+					<!-- @formatter:off -->
+					{{#validationOptions}}
+					<option value="{{value}}" {{#selected}}selected{{/selected}}>{{text}}</option>
+					{{/validationOptions}}
+					<!-- @formatter:on -->
+				</select>
+				<label>{{#m}}indicator.validation{{/m}}</label>
+			</div>
+			<div class="input-field col s12" data-bind="visible: validation() == 'VALIDATED'">
+				<i class="material-icons prefix">{{#m}}indicator.validationMethod.icon{{/m}}</i>
+				<textarea id="validationMethod" name="validationMethod"
+						  class="materialize-textarea">{{ indicator.validationMethod }}</textarea>
+				<label for="validationMethod">{{#m}}indicator.validationMethod{{/m}}</label>
+			</div>
+			<div id="tags-editor">
+				<div class="input-field col s12">
+					<i class="material-icons prefix">{{#m}}indicator.tags.icon{{/m}}</i>
+					<label>{{#m}}indicator.tags{{/m}} ({{#m}}indicator.tags.placeholder{{/m}})</label>
+					<div id="tags-input"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="divider"></div>
+	<div class="section center">
+		<button class="btn waves-effect waves-light" type="submit" name="action">
+			{{#m}}admin.indicator.save{{/m}}
+			<i class="material-icons right">save</i>
+		</button>
+	</div>
+
+	<!-- autocomplete -->
+	{{#allDevelopers}}
+	<input type="hidden" value="{{.}}" class="autocomplete-import developer">
+	{{/allDevelopers}}
+	{{#allProgrammingLanguages}}
+	<input type="hidden" value="{{.}}" class="autocomplete-import programmingLanguage">
+	{{/allProgrammingLanguages}}
+	{{#allProjectUrls}}
+	<input type="hidden" value="{{.}}" class="autocomplete-import projectUrl">
+	{{/allProjectUrls}}
+	{{#allSourceCodeUrls}}
+	<input type="hidden" value="{{.}}" class="autocomplete-import sourceCodeUrl">
+	{{/allSourceCodeUrls}}
+	{{#allTags}}
+	<input type="hidden" value="{{.}}" class="autocomplete-import tags">
+	{{/allTags}}
+
+	<!-- initial form data -->
+	{{#indicator.tags}}
+	<input type="hidden" name="tags" value="{{.}}" class="import">
+	{{/indicator.tags}}
+
+	<!-- dynamic form data -->
+	<div data-bind="foreach: tags">
+		<input type="hidden" name="tags" data-bind="textInput: tag">
+	</div>
+</form>
+
+<script type="text/javascript" src="/js/indicator-edit.js"></script>
+
+{{/_admin}}
+{{>_layouts/admin}}

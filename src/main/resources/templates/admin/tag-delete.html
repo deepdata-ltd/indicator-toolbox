@@ -1,0 +1,39 @@
+{{#_admin}}
+
+<div class="row">
+	<div class="col s12">
+		<h1>
+			<small><a href="{{ paths.TAG_LIST_URI }}">{{#m}}admin.tags.title{{/m}}</a> /</small>
+			<br>
+			{{ tag.name }}
+		</h1>
+	</div>
+</div>
+
+<div class="divider"></div>
+
+<form action="{{ tag.id }}" method="post">
+	<input name="_csrf" type="hidden" value="{{ _csrf.token }}"/>
+	<div class="row section">
+		<div class="col s12">
+			<h3 class="center">{{#m}}admin.tag.delete.confirm{{/m}}</h3>
+		</div>
+	</div>
+	<div class="row section">
+		<div class="col s12 m6 center">
+			<br>
+			<button class="btn-large red waves-effect waves-light" type="submit" name="action">
+				{{#m}}admin.tag.delete.yes{{/m}}
+			</button>
+		</div>
+		<div class="col s12 m6 center">
+			<br>
+			<a href="{{ paths.TAG_LIST_URI }}" class="btn-large blue waves-effect waves-light">
+				{{#m}}admin.tag.delete.no{{/m}}
+			</a>
+		</div>
+	</div>
+</form>
+
+{{/_admin}}
+{{>_layouts/admin}}

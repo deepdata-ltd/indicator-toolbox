@@ -1,0 +1,9 @@
+<div class="input-field col s12">
+	<!-- @formatter:off -->
+	<i class="material-icons prefix">{{ input-field.icon }}</i>
+	<input id="{{ input-field.field }}" name="{{ input-field.field }}" type="text" value="{{ input-field.value }}" autocomplete="off"
+		{{#input-field.error}}class="invalid"{{/input-field.error}}
+		{{#input-field.readOnly}}readonly{{/input-field.readOnly}}>
+	<label for="{{ input-field.field }}" data-error="{{ input-field.errorLabel }}">{{ input-field.label }}</label>
+	<!-- @formatter:on -->
+</div>
